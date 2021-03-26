@@ -9,17 +9,17 @@ EventQueue queue(32 * EVENTS_EVENT_SIZE);
 uLCD_4DGL uLCD(D1, D0, D2);
 AnalogOut Aout(D7);
 AnalogIn Ain(A0);
+
 Thread t;
 int frequency[10] = {1,2,3,4,5,6,7,8,9,10};
 int sample = 128;
 float ADCdata[256];
 
-void Print_data()  {
+void Print_data() {
     for (int i = 128; i < 256; i++){
         printf("%f\r\n", ADCdata[i]);
         ThisThread::sleep_for(10ms);
-  }
-   
+    }  
 }
 
 
@@ -63,28 +63,24 @@ int main()
     gap1 = (1.0f  / (sample * 0.8f)) * frequency_use;
     gap2 = (1.0f / (sample * 0.2f)) * frequency_use;
     int k = 0;
-    int l = 0;
 
     t.start(callback(&queue, &EventQueue::dispatch_forever));
     sw3.rise(queue.event(Print_data));
     while(1) {
         for (float j = 0; j <= 1; j = j + gap1) {
             Aout = j;
-            if ((k < sample + sample)) {
+            if (k < 2 * sample) {
                 ADCdata[k] = Ain;
-                //printf("%f\r\n", ADCdata[k]);
                 k++;
-            } //else break;
+            }
             ThisThread::sleep_for(1000ms / sample);
         }
         for (float j = 1; j >= 0; j = j - gap2) {
             Aout = j;
-            if ((k < 2*sample)) {
+            if (k < 2 * sample) {
                 ADCdata[k] = Ain;
-                //printf("%f\r\n", ADCdata[k]);
                 k++;
-            } //else break;
-            
+            }
             ThisThread::sleep_for(1000ms / sample);
         }
     }
