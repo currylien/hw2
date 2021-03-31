@@ -126,4 +126,10 @@ ax[1].set_xlabel('Freq (Hz)')
 ax[1].set_ylabel('|Y(freq)|')
 plt.show()
 s.close()
-```
+```  
+**2Hz**
+![image](https://github.com/currylien/hw2/blob/master/P_20210326_124014.jpg?raw=true)
+![image](https://github.com/currylien/hw2/blob/master/P_20210326_220227.jpg?raw=true)  
+**7Hz**
+![image](https://github.com/currylien/hw2/blob/master/P_20210326_124406.jpg?raw=true)
+![image](https://github.com/currylien/hw2/blob/master/P_20210326_220200.jpg?raw=true)
